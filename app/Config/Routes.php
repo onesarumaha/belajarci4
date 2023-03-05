@@ -37,10 +37,22 @@ $routes->get('create-db', function() {
         echo "Database Create";
     }
 });    
-
+// URL HOME
 $routes->get('/', 'Home::index');
-
+// URL defoul
 $routes->get('gawe', 'Gawe::index');
+// URL MENUJU TAMBAH
+$routes->get('gawe/add', 'Gawe::create');
+// URL ECTION TAMBAH DATA
+$routes->post('gawe', 'Gawe::store');
+// URL MENUJU EDIT DATA
+$routes->get('gawe/edit/(:any)', 'Gawe::edit/$1'); 
+// URL ECTION EDIT
+$routes->put('gawe/(:any)', 'Gawe::update/$1'); 
+// URL ECTION hapus
+$routes->delete('gawe/(:segment)', 'Gawe::destroy/$1'); 
+
+
 
 /*
  * --------------------------------------------------------------------
