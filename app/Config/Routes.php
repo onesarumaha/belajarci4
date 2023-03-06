@@ -52,6 +52,11 @@ $routes->put('gawe/(:any)', 'Gawe::update/$1');
 // URL ECTION hapus
 $routes->delete('gawe/(:segment)', 'Gawe::destroy/$1'); 
 
+$routes->get('login', 'Auth::login');
+// URL ECTION login
+$routes->post('login/loginproses', 'Auth::loginproses');
+
+
 
 
 /*
