@@ -55,6 +55,11 @@ $routes->delete('gawe/(:segment)', 'Gawe::destroy/$1');
 $routes->get('login', 'Auth::login');
 // URL ECTION login
 $routes->post('login/loginproses', 'Auth::loginproses');
+// membuat URL LOGOUT
+$routes->get('login/logout', 'Auth::logout');
+
+$routes->presenter('groups');
+
 
 
 

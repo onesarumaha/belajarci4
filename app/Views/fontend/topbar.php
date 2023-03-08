@@ -220,7 +220,7 @@
                     <li><a class="dropdown-item" href="<?= base_url('template/') ?>dashboard/app/user-profile.html">Profile</a></li>
                     <li><a class="dropdown-item" href="<?= base_url('template/') ?>dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="<?= base_url('template/') ?>dashboard/auth/sign-in.html">Logout</a></li>
+                    <li><a class="dropdown-item" href="<?= base_url('login/logout') ?>">Logout</a></li>
                   </ul>
                 </li>
               </ul>
