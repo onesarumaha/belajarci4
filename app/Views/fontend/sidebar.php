@@ -76,7 +76,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link " href="<?= base_url('template/') ?>dashboard/index-horizontal.html">
+                                <a class="nav-link " href="<?= base_url('groups/') ?>">
                                   <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>

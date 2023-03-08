@@ -58,6 +58,8 @@ $routes->post('login/loginproses', 'Auth::loginproses');
 // membuat URL LOGOUT
 $routes->get('login/logout', 'Auth::logout');
 
+
+// membuat banyak routes otomatis
 $routes->presenter('groups');
 
 
