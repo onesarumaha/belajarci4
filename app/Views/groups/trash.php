@@ -25,13 +25,17 @@
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title">Data Acara Gawe</h4>
+                  <h4 class="card-title">Data Trash Gawe</h4>
                </div>
             </div>
             <div class="card-body">
-              <a href="<?= base_url('groups/new') ?>"> <button class="btn btn-primary btn-sm mb-2">Add New</button></a>
               <div class="card-header-action float-right">
-                 <a href="<?= base_url('groups/trash') ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Trush</a>
+                 <a href="<?= base_url('groups/restore') ?>" class="btn btn-danger btn-sm">Restore All</a>
+
+                 <form action="<?= site_url('groups/delete2') ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin mau dihapus ?')">
+                        <?= csrf_field() ?>
+                     <button class="btn btn-danger btn-sm">Hapus All</button>
+                 </form>
               </div>
                <div class="table-responsive">
                   <table id="datatable" class="table table-striped" data-toggle="data-table">
@@ -54,11 +58,11 @@
                            <td><?= $group->info_group; ?></td>
                            <td>
                              
-                             <form action="<?= base_url('groups/delete/'.$group->id_group) ?>" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau dihapus ?')">
+                             <form action="<?= base_url('groups/delete2/'.$group->id_group) ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin mau dihapus ?')">
                                  <?= csrf_field() ?>
-                                 <button class="btn btn-danger btn-sm">Hapus</button>
+                                 <button class="btn btn-danger btn-sm">Hapus Permanent</button>
                              </form>
-                             <a href="<?= base_url('groups/edit/'.$group->id_group) ?>"> <button class="btn btn-warning btn-sm">Edit</button></a>
+                             <a href="<?= base_url('groups/restore/'.$group->id_group) ?>"> <button class="btn btn-primary btn-sm">Restore</button></a>
                            </td>
                            
                         </tr>

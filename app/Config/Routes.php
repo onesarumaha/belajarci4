@@ -59,8 +59,16 @@ $routes->post('login/loginproses', 'Auth::loginproses');
 $routes->get('login/logout', 'Auth::logout');
 
 
+$routes->get('groups/trash', 'Groups::trash');
+$routes->get('groups/restore/(:any)', 'Groups::restore/$1');
+$routes->get('groups/restore', 'Groups::restore');
+$routes->post('groups/delete2/(:any)', 'Groups::delete2/$1');
+$routes->post('groups/delete2', 'Groups::delete2');
+
 // membuat banyak routes otomatis
 $routes->presenter('groups');
+
+$routes->resource('contacts');
 
 
 

@@ -68,6 +68,10 @@ class Filters extends BaseConfig
                 '/',
                 'gawe',
                 'gawe/*',
+                'groups',
+                'groups/*',
+                'contacts',
+                'contacts/*',
             ]
         ]
     ];

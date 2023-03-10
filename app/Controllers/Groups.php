@@ -15,6 +15,8 @@ class Groups extends ResourcePresenter
     }
 
     // protected $modelName = 'App\Models\GroupModel';
+    protected $helpers = ['Custome'];
+    
 
     /**
      * Present a view of resource objects
@@ -91,11 +93,19 @@ class Groups extends ResourcePresenter
     public function edit($id = null)
     {
         $data['title'] = "Edit Data Groups";
+        $group = $this->group->where('id_group', $id)->first();
+
+        if(is_object($group)) {
+            $data['group'] = $group;
+        }else{
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         echo view('fontend/header', $data);
         echo view('fontend/sidebar');
         echo view('fontend/topbar');
         echo view('fontend/box');
-        echo view('groups/edit');
+        echo view('groups/edit', $data);
         echo view('fontend/footer');
         
     }
@@ -110,7 +120,11 @@ class Groups extends ResourcePresenter
      */
     public function update($id = null)
     {
-        //
+
+        $data = $this->request->getPost();
+        $this->group->update($id, $data);
+        return redirect()->to(base_url('groups'))->with('success', 'Data Berhasil Diupdate');
+        
     }
 
     /**
@@ -134,6 +148,56 @@ class Groups extends ResourcePresenter
      */
     public function delete($id = null)
     {
-        //
+        $this->group->where('id_group',$id)->delete();
+        return redirect()->to(base_url('groups'))->with('success', 'Data Berhasil Dihapus');
     }
+
+    public function trash()
+    {
+        $data['title'] = "Data Trash Groups";
+        $data['groups'] = $this->group->onlyDeleted()->findAll();
+        // $data['groups'] = $this->model->findAll();
+        echo view('fontend/header', $data);
+        echo view('fontend/sidebar');
+        echo view('fontend/topbar');
+        echo view('fontend/box');
+        echo view('groups/trash', $data);
+        echo view('fontend/footer');
+    }
+
+    public function restore($id = null)
+    {
+        $this->db = \Config\Database::connect();
+
+        if($id != null) {
+            // $this->group->update($id, ['deleted_at' => null]);
+            $this->db->table('groups')
+                    ->set('deleted_at', null, true)
+                    ->where(['id_group' => $id])
+                    ->update();
+            
+        }else{
+            $this->db->table('groups')
+                    ->set('deleted_at', null, true)
+                    ->where('deleted_at is NOT NULL', NULL, FALSE )
+                    ->update();
+        }
+        if($this->db->affectedRows() > 0) {
+            return redirect()->to(base_url('groups'))->with('success', 'Data Berhasil Direstore');
+        }
+    }
+
+     public function delete2($id = null)
+    {
+        if($id != null) {
+            $this->group->delete($id, true);
+            return redirect()->to(base_url('groups/trash'))->with('success', 'Data Berhasil Dihapus Permanent');
+        }else{
+            $this->group->purgeDeleted($id, true);
+            return redirect()->to(base_url('groups/trash'))->with('success', 'Data Berhasil Dihapus Permanent');
+        }
+       
+    }
+
+
 }
