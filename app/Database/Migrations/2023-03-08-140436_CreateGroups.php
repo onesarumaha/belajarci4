@@ -42,6 +42,6 @@ class CreateGroups extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('gawe');
+        $this->forge->dropTable('groups');
     }
 }

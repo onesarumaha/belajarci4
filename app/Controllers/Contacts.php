@@ -3,24 +3,31 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\GroupModel;
+use App\Models\ContactModel;
 
 class Contacts extends ResourceController
 {
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return mixed
-     */
+    protected $helpers = ['Custome'];
+
+    function __construct() {
+        $this->group = new GroupModel();
+        $this->contact = new ContactModel();
+    }
+
+
     public function index()
     {
         $data['title'] = "Data Kontak";
-        // $data['groups'] = $this->model->findAll();
-        echo view('fontend/header', $data);
-        echo view('fontend/sidebar');
-        echo view('fontend/topbar');
-        echo view('fontend/box');
-        echo view('contact/index');
-        echo view('fontend/footer');
+
+        $data['contacts'] = $this->contact->getAll();
+
+        return view('fontend/header', $data)
+            . view('fontend/sidebar')
+            . view('fontend/topbar')
+            . view('fontend/box')
+            . view('contact/index', $data)
+            . view('fontend/footer');
     }
 
     /**
@@ -40,7 +47,15 @@ class Contacts extends ResourceController
      */
     public function new()
     {
-        //
+         $data['title'] = "New Kontak";
+         $data['groups'] = $this->group->findAll();
+
+         return view('fontend/header', $data)
+            . view('fontend/sidebar')
+            . view('fontend/topbar')
+            . view('fontend/box')
+            . view('contact/new', $data)
+            . view('fontend/footer');
     }
 
     /**
@@ -50,7 +65,9 @@ class Contacts extends ResourceController
      */
     public function create()
     {
-        //
+        $data = $this->request->getPost();
+        $this->contact->insert($data);
+        return redirect()->to(base_url('contacts'))->with('success', 'Data Berhasil Disimpan');
     }
 
     /**
@@ -60,7 +77,14 @@ class Contacts extends ResourceController
      */
     public function edit($id = null)
     {
-        //
+         $data['title'] = "Edit Kontak";
+
+         return view('fontend/header', $data)
+            . view('fontend/sidebar')
+            . view('fontend/topbar')
+            . view('fontend/box')
+            . view('contact/edit')
+            . view('fontend/footer');
     }
 
     /**
