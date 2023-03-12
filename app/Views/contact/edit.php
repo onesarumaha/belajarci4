@@ -11,17 +11,52 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="<?= base_url('groups/update/') ?>" method="POST">
+                    <form action="<?= base_url('contacts/'.$contact->id_contact) ?>" method="POST">
                     	<?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="PATCH">
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="text">Group : *</label>
+                            <select name="id_group" class="form-control" required> 
+                                <option value="" hidden></option>
+                                <?php foreach($groups as $gr ) : ?>
+                            <option value="<?= $gr->id_group ?>" <?= $contact->id_group == $gr->id_group ? 'selected' : null ?>>
+                                <?= $gr->name_group ?>
+                                    
+                                </option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label class="form-label" for="text">Nama Kontak : *</label>
-                            <input type="text" class="form-control" id="text1" name="name_group" value="">
+                            <input type="text" class="form-control" id="text1" name="name_contact" value="<?= $contact->name_contact ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="text">Nama Alias : *</label>
+                            <input type="text" class="form-control" id="text1" name="name_alias" value="<?= $contact->name_alias ?>">
                         </div>
 
 
                         <div class="form-group">
-                            <label class="form-label" for="text">Info : *</label>
-                            <textarea class="form-control" name="info_group"></textarea>
+                            <label class="form-label" for="text">Phone : *</label>
+                            <input type="number" class="form-control" id="text1" name="phone" value="<?= $contact->phone ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="text">Email: *</label>
+                            <input type="email" class="form-control" id="text1" name="email" value="<?= $contact->email ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="text">Info Group: *</label>
+                            <input type="text" class="form-control" id="text1" name="info_contact" value="<?= $contact->info_contact ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="text">Address: *</label>
+                            <textarea class="form-control" name="address"><?= $contact->address ?></textarea>
                         </div>
                         
                        

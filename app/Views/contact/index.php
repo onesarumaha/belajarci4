@@ -64,12 +64,12 @@
                            <td><?= $value->name_group; ?></td>
                            <td>
                              
-                             <form action="<?= base_url('gawe/'.$value->id_contact) ?>" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau dihapus ?')">
+                             <form action="<?= base_url('contacts/'.$value->id_contact) ?>" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau dihapus ?')">
                                  <?= csrf_field() ?>
                                  <input type="hidden" name="_method" value="DELETE">
                                  <button class="btn btn-danger btn-sm">Hapus</button>
                              </form>
-                             <a href="<?= base_url('gawe/edit/'.$value->id_contact) ?>"> <button class="btn btn-warning btn-sm">Edit</button></a>
+                             <a href="<?= base_url('contacts/'.$value->id_contact.'/edit/') ?>"> <button class="btn btn-warning btn-sm">Edit</button></a>
                            </td>
                            
                         </tr>

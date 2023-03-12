@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <label class="form-label" for="text">Info Group: *</label>
-                            <input type="text" class="form-control" id="text1" name="info_group">
+                            <input type="text" class="form-control" id="text1" name="info_contact">
                         </div>
 
                         <div class="form-group">

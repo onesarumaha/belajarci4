@@ -78,6 +78,14 @@ class Contacts extends ResourceController
     public function edit($id = null)
     {
          $data['title'] = "Edit Kontak";
+         $contact = $this->contact->find($id);
+
+         if(is_object($contact)) {
+            $data['contact'] = $contact;
+            $data['groups'] = $this->group->findAll();
+        }else{
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
          return view('fontend/header', $data)
             . view('fontend/sidebar')
@@ -94,7 +102,9 @@ class Contacts extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $data = $this->request->getPost();
+        $this->contact->update($id, $data);
+        return redirect()->to(base_url('contacts'))->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -104,6 +114,7 @@ class Contacts extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $this->contact->where('id_contact',$id)->delete();
+        return redirect()->to(base_url('contacts'))->with('success', 'Data Berhasil Dihapus');
     }
 }
