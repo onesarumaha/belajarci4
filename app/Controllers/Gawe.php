@@ -37,6 +37,29 @@ class Gawe extends BaseController
     {
         $data['title'] = 'One Sarumaha | Add';
 
+         // validasi
+        $validate = $this->validate([
+            'name_gawe' => [
+                'rules' => 'required|min_length[3]',
+                'errors' => [
+                    'required' => 'Nama Gawe Harus diisi',
+                    'min_length' => 'Nama Gawe min 3 karakter'
+                ],
+            ],
+            'date_gawe' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Gawe Harus diisi',
+                    
+                ],
+            ],
+            
+        ]);
+
+        if(!$validate) {
+            return redirect()->back()->withInput();
+        }
+
         // cara mudah : nama field sama dengan nama form
         // $data = $this->request->getPost();
 
@@ -82,6 +105,30 @@ class Gawe extends BaseController
 
     public function update($id = null ) 
     {
+
+         // validasi
+        $validate = $this->validate([
+            'name_gawe' => [
+                'rules' => 'required|min_length[3]',
+                'errors' => [
+                    'required' => 'Nama Gawe Harus diisi',
+                    'min_length' => 'Nama Gawe min 3 karakter'
+                ],
+            ],
+            'date_gawe' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Gawe Harus diisi',
+                    
+                ],
+            ],
+            
+        ]);
+
+        if(!$validate) {
+            return redirect()->back()->withInput();
+        }
+        
         // cara 1
         $data = $this->request->getPost();
         unset($data['_method']);

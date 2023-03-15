@@ -1,4 +1,5 @@
 
+            <?php $validation = \Config\Services::validation(); ?>
 
       <div class="conatiner-fluid content-inner mt-n5 py-0">
       
@@ -15,7 +16,10 @@
                     	<?= csrf_field() ?>
                         <div class="form-group">
                             <label class="form-label" for="text">Nama Group : *</label>
-                            <input type="text" class="form-control" id="text1" name="name_group" value="<?= $group->name_group; ?>">
+                            <input type="text" class="form-control <?= $validation->hasError('name_group') ? 'is-invalid' : null ?>" id="text1" name="name_group" value="<?= old('name_group', $group->name_group)  ; ?>">
+                            <div class="invalid-feedback">
+                                <?=$validation->getError('name_group'); ?>
+                           </div>
                         </div>
 
 

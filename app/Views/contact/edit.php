@@ -1,3 +1,4 @@
+                    <?php $errors = session()->getFlashdata('errors'); ?>
 
 
       <div class="conatiner-fluid content-inner mt-n5 py-0">
@@ -17,20 +18,26 @@
                         
                         <div class="form-group">
                             <label class="form-label" for="text">Group : *</label>
-                            <select name="id_group" class="form-control" required> 
+                            <select name="id_group" class="form-control <?= isset($errors['id_group']) ? 'is-invalid' : null ?>" > 
                                 <option value="" hidden></option>
                                 <?php foreach($groups as $gr ) : ?>
-                            <option value="<?= $gr->id_group ?>" <?= $contact->id_group == $gr->id_group ? 'selected' : null ?>>
+    <option value="<?= $gr->id_group ?>" <?= old('id_group', $contact->id_group)  == $gr->id_group ? 'selected' : null ?>>
                                 <?= $gr->name_group ?>
                                     
                                 </option>
                                 <?php endforeach ?>
                             </select>
+                            <div class="invalid-feedback">
+                                <?= isset($errors['id_group']) ? $errors['id_group'] : null ?>
+                           </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="text">Nama Kontak : *</label>
-                            <input type="text" class="form-control" id="text1" name="name_contact" value="<?= $contact->name_contact ?>">
+                            <input type="text" class="form-control  <?= isset($errors['name_contact']) ? 'is-invalid' : null ?>" id="text1" name="name_contact" value="<?= old('name_contact', $contact->name_contact ) ?>">
+                            <div class="invalid-feedback">
+                                <?= isset($errors['name_contact']) ? $errors['name_contact'] : null ?>
+                           </div>
                         </div>
 
                         <div class="form-group">

@@ -15,6 +15,21 @@ class ContactModel extends Model
     protected $useTimestamps    = true;
     protected $useSoftDeletes   = false;
 
+    protected $validationRules = [
+        'id_group'            => 'required',
+        'name_contact'        => 'required|min_length[3]',
+        
+    ];
+    protected $validationMessages = [
+        'id_group' => [
+            'required' => 'Grup belum dipilih.',
+        ],
+        'name_contact' => [
+            'required' => 'Nama Kontak harus diisi.',
+            'min_length' => 'Nama Kontak minimal 3 karakter.',
+        ],
+    ];
+
     function getAll()
     {
         $builder = $this->db->table('contacts');

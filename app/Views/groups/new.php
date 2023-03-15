@@ -4,6 +4,8 @@
       
        <div class="row">
         <div class="col-sm-12 col-lg-12">
+            <?php $validation = \Config\Services::validation(); ?>
+
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
@@ -15,7 +17,10 @@
                     	<?= csrf_field() ?>
                         <div class="form-group">
                             <label class="form-label" for="text">Nama Group : *</label>
-                            <input type="text" class="form-control" id="text1" name="name_group">
+                            <input type="text" class="form-control <?= $validation->hasError('name_group') ? 'is-invalid' : null ?> " id="text1" name="name_group" value="<?= old('name_group') ?>">
+                            <div class="invalid-feedback">
+                                <?=$validation->getError('name_group'); ?>
+                           </div>
                         </div>
 
 

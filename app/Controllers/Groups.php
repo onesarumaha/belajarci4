@@ -73,6 +73,22 @@ class Groups extends ResourcePresenter
      */
     public function create()
     {
+        // validasi
+        $validate = $this->validate([
+            'name_group' => [
+                'rules' => 'required|min_length[3]',
+                'errors' => [
+                    'required' => 'Nama Groups Harus diisi',
+                    'min_length' => 'Nama Groups min 3 karakter'
+                ],
+            ],
+
+        ]);
+
+        if(!$validate) {
+            return redirect()->back()->withInput();
+        }
+
         // memperoses tambah data file new
 
         $data = $this->request->getPost();
@@ -120,6 +136,21 @@ class Groups extends ResourcePresenter
      */
     public function update($id = null)
     {
+         // validasi
+        $validate = $this->validate([
+            'name_group' => [
+                'rules' => 'required|min_length[3]',
+                'errors' => [
+                    'required' => 'Nama Groups Harus diisi',
+                    'min_length' => 'Nama Groups min 3 karakter'
+                ],
+            ],
+            
+        ]);
+
+        if(!$validate) {
+            return redirect()->back()->withInput();
+        }
 
         $data = $this->request->getPost();
         $this->group->update($id, $data);

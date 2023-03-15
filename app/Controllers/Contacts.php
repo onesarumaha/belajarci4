@@ -66,8 +66,13 @@ class Contacts extends ResourceController
     public function create()
     {
         $data = $this->request->getPost();
-        $this->contact->insert($data);
+        // validasi melalui model
+       $save = $this->contact->insert($data);
+       if(!$save){
+            return redirect()->back()->withInput('errors', $this->contact->errors());
+       }else{
         return redirect()->to(base_url('contacts'))->with('success', 'Data Berhasil Disimpan');
+       }
     }
 
     /**
@@ -103,8 +108,12 @@ class Contacts extends ResourceController
     public function update($id = null)
     {
         $data = $this->request->getPost();
-        $this->contact->update($id, $data);
-        return redirect()->to(base_url('contacts'))->with('success', 'Data Berhasil Diupdate');
+        $save = $this->contact->update($id, $data);
+        if(!$save){
+            return redirect()->back()->withInput('errors', $this->contact->errors());
+        }else{
+            return redirect()->to(base_url('contacts'))->with('success', 'Data Berhasil Diupdate');
+        }
     }
 
     /**
