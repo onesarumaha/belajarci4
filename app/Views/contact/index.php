@@ -33,6 +33,18 @@
               <div class="card-header-action float-right">
                  <a href="<?= base_url('groups/trash') ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Trush</a>
               </div>
+                 <div class="card-header"> 
+                     <form action="" method="get" autocomplete="off">
+                        <div class="float-left">
+                           <?php $request = \Config\Services::request(); ?>
+                           <input type="text" name="keyword" class="form-control" style="width: 155pt;" placeholder="Keyword Pencarian" value="<?= $request->getGet('keyword'); ?>">
+                        </div>
+                        <div class="float-right ml-3">
+                           <button class="btn btn-primary btn-sm" type="submit">Cari</button>
+                        </div>
+                     </form>
+
+                  </div>   
                <div class="table-responsive">
                   <table id="basic-table" class="table table-striped mb-0" role="grid">
                      <thead>
@@ -51,10 +63,11 @@
                      </thead>
                       <tbody>
                         <?php 
-
+                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                        $no = 1 + (5 * ($page - 1));
                         foreach($contacts as $key => $value ) : ?>
                         <tr>
-                           <td><?= $key + 1 ?> </td>
+                           <td><?= $no++ ?> </td>
                            <td><?= $value->name_contact; ?></td>
                            <td><?= $value->name_alias; ?></td>
                            <td><?= $value->phone; ?></td>
@@ -76,6 +89,12 @@
                         <?php endforeach; ?>
                      </tbody>
                   </table>
+                  <div class="float-left">
+                     <i>Showing <?= 1 + (10 * ($page - 1)) ?> to <?= $no-1 ?> of <?= $pager->getTotal() ?> entries</i>
+                  </div>
+                  <div class="float-right"> 
+                     <?= $pager->links('default', 'pagination') ?>
+                  </div>
                </div>
             </div>
          </div>

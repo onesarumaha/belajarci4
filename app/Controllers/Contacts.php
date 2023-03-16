@@ -19,14 +19,14 @@ class Contacts extends ResourceController
     public function index()
     {
         $data['title'] = "Data Kontak";
-
-        $data['contacts'] = $this->contact->getAll();
+        $keyword = $this->request->getGet('keyword');
+        $data2 = $this->contact->getPaginated(10, $keyword);
 
         return view('fontend/header', $data)
             . view('fontend/sidebar')
             . view('fontend/topbar')
             . view('fontend/box')
-            . view('contact/index', $data)
+            . view('contact/index', $data2)
             . view('fontend/footer');
     }
 

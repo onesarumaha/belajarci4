@@ -1,9 +1,10 @@
+
 <!doctype html>
-<html lang="en" dir="ltr">
+    <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title> <?= $title ?> </title>
+      <title><?= $title ?></title>
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="<?= base_url('template/') ?>assets/images/favicon.ico" />
@@ -11,8 +12,6 @@
       <!-- Library / Plugin Css Build -->
       <link rel="stylesheet" href="<?= base_url('template/') ?>assets/css/core/libs.min.css" />
       
-      <!-- Aos Animation Css -->
-      <link rel="stylesheet" href="<?= base_url('template/') ?>assets/vendor/aos/dist/aos.css" />
       
       <!-- Hope Ui Design System Css -->
       <link rel="stylesheet" href="<?= base_url('template/') ?>assets/css/hope-ui.min.css?v=1.2.0" />
@@ -31,9 +30,3 @@
       
   </head>
   <body class="  ">
-    <!-- loader Start -->
-    <div id="loading">
-      <div class="loader simple-loader">
-          <div class="loader-body"></div>
-      </div>    </div>
-    <!-- loader END -->

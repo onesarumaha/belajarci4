@@ -39,6 +39,23 @@ class ContactModel extends Model
 
     }
 
+    function getPaginated($num, $keyword = null) 
+    {
+        $builder = $this->builder();
+        $builder->join('groups', 'groups.id_group = contacts.id_group');
+        if($keyword != ''){
+            $builder->like('name_contact', $keyword);
+            $builder->orlike('name_alias', $keyword);
+            $builder->orlike('email', $keyword);
+            $builder->orlike('address', $keyword);
+            $builder->orlike('name_group', $keyword);
+        }
+        return [
+            'contacts' => $this->paginate($num),
+            'pager' => $this->pager,
+        ];
+    }
+
 
 
 }
